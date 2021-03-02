@@ -56,43 +56,33 @@ class Solution:
     
     def levelOrder(self, root: TreeNode) -> List[List[int]]:
 
+        # return self.levelOrder_BFS(root)
         return self.levelOrder_DFS(root)
 
-
     def levelOrder_DFS(self, root: TreeNode):
-        """使用DFS解决
+        """使用DFS解决，T(n)=O(n)
         """
-
         self.result = []
-
         # DFS helper
         def helper(node, level):
-
             if not node:
                 return
-
+            # 确保存在对应层数组
             if len(self.result) < level+1:
                 self.result.append([])
             
             self.result[level].append(node.val)
-
             helper(node.left, level+1)
             helper(node.right, level+1)
 
-            return
-
         helper(root, 0)
-
         return self.result
 
-    
     def levelOrder_BFS(self, root: TreeNode):
-        """使用BFS解决
+        """使用BFS解决，T(n)=O(n)
         """
-
         if not root:
             return []
-
         # BFS
         queue = collections.deque()
         queue.append(root)
@@ -100,17 +90,14 @@ class Solution:
         traversal = []
 
         while queue:
-
             level = []
             level_size = len(queue)
-
             for _ in range(level_size):
                 node = queue.popleft()
                 level.append(node.val)
 
                 if node.left:
                     queue.append(node.left)
-
                 if node.right:
                     queue.append(node.right)
 
