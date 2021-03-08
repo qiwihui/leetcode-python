@@ -60,6 +60,10 @@
 
 class Solution:
     def invertTree(self, root: TreeNode) -> TreeNode:
+        return self._travase(root)
+        # return self._bfs(root)
+
+    def _bfs(self, root):
         if not root:
             return None
         
@@ -71,6 +75,14 @@ class Solution:
                 stack.append(node.left)
             if node.right:
                 stack.append(node.right)
+        return root
+    
+    def _travase(self, root):
+        if root is None:
+            return None
+        root.left, root.right = root.right, root.left
+        self._travase(root.left)
+        self._travase(root.right)
         return root
         
         
