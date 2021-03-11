@@ -70,16 +70,46 @@
 #
 #
 #
-
+from typing import List
 # @lc code=start
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
-        count = 1
-        for i in range(len(nums) - 1):
-            if nums[i] != nums[i + 1]:
-                nums[count] = nums[i + 1]
-                count += 1
-        return count
-
+        if not nums:
+            return 0
+        # 快慢指针技巧
+        slow = fast = 0
+        while fast < len(nums):
+            if nums[fast] != nums[slow]:
+                slow += 1
+                nums[slow] = nums[fast]
+            fast += 1
+        # print(nums[:slow+1])
+        return slow+1
 
 # @lc code=end
+
+# for ListNone
+from ds_linkedlist import ListNode
+
+class Solution2:
+    def removeDuplicates(self, head: ListNode) -> ListNode:
+        if head is None:
+            return None
+        # 快慢指针技巧
+        slow = fast = head
+        while fast is not None:
+            if fast.val != slow.val:
+                slow.next = fast
+                slow = slow.next
+                
+            fast = fast.next
+        
+        slow.next = None
+        return head
+
+
+if __name__ == "__main__":
+    print(Solution().removeDuplicates([0,0,1,1,1,2,2,3,3,4])==5)
+    print(Solution().removeDuplicates([]))
+
+    print(Solution2().removeDuplicates(ListNode.build([0,0,1,1,1,2,2,3,3,4])))

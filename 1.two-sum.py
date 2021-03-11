@@ -33,13 +33,19 @@
 # @lc code=start
 class Solution:
     def twoSum(self, nums: List[int], target: int) -> List[int]:
+        # 使用哈希表加速
+        # Time: O(N), Space: O(N)
         table = {}
         for idx, value in enumerate(nums):
             dif = target - value
             if dif in table:
-                return table[dif], idx
+                return [table[dif], idx]
             table[value] = idx
         return []
+    
+    # 暴力，O(N^2), O(1)
+    # 排序，再双指针
+    # 排序，再辅助哈希表
         
 # @lc code=end
 

@@ -11,3 +11,11 @@ class ListNode:
             res.append(str(head.val))
             head = head.next
         return "->".join(res)
+
+    @staticmethod
+    def build(array):
+        root = head = ListNode(0)
+        for i in array:
+            head.next = ListNode(i)
+            head = head.next
+        return root.next
